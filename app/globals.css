@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #08080a;
+  --color-foreground: #ededed;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
+}
+
+/* ── Brand tokens ── */
+:root {
+  --surface:        #08080a;
+  --surface-raised: #0c0c10;
+  --gold:           #c9a853;
+  --gold-light:     #e8c96b;
+  --gold-dim:       rgba(201,168,83,0.7);
+  --fg:             #ededed;
+  --fg-muted:       rgba(255,255,255,0.5);
+  --fg-dim:         rgba(255,255,255,0.3);
+  --border-subtle:  rgba(255,255,255,0.08);
+  --border-hover:   rgba(255,255,255,0.2);
+}
+
+html,
+body {
+  background: #08080a;
+  color: #ededed;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* ── Global focus-visible ring ── */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid rgba(201, 168, 83, 0.75);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
