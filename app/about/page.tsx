@@ -2,7 +2,11 @@ import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
 import { PRODUCT } from "@/lib/product.config";
 
-export const metadata = { title: `About — ${PRODUCT.brand}` };
+export const metadata = {
+  title: `About — ${PRODUCT.brand}`,
+  description: "MERIDIAN was founded in 2021. Every watch is built once, to order, in a single workshop. No stock, no waste.",
+  alternates: { canonical: "/about" },
+};
 
 const STATS = [
   { end: 2021,  suffix: "",  label: "Founded" },

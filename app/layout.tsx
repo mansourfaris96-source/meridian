@@ -21,9 +21,31 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
+const BASE_URL = "https://meridian3.netlify.app";
+
 export const metadata: Metadata = {
-  title: `${PRODUCT.brand} ${PRODUCT.name} — Configure yours in 3D`,
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: `${PRODUCT.brand} ${PRODUCT.name} — Configure yours in 3D`,
+    template: `%s — ${PRODUCT.brand}`,
+  },
   description: PRODUCT.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: PRODUCT.brand,
+    title: `${PRODUCT.brand} ${PRODUCT.name} — Configure yours in 3D`,
+    description: PRODUCT.description,
+    url: BASE_URL,
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "MERIDIAN — The Calibre One" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${PRODUCT.brand} ${PRODUCT.name} — Configure yours in 3D`,
+    description: PRODUCT.description,
+    images: ["/og-image.jpg"],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

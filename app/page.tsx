@@ -12,6 +12,41 @@ import TiltCard from "@/components/TiltCard";
 import SplitHeadline from "@/components/SplitHeadline";
 import { PRODUCT } from "@/lib/product.config";
 
+const SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://meridian3.netlify.app/#org",
+      "name": "MERIDIAN",
+      "url": "https://meridian3.netlify.app",
+      "foundingDate": "2021",
+      "description": "Made-to-order luxury watches configured in 3D. One watch, built once, for you.",
+    },
+    {
+      "@type": "Product",
+      "@id": "https://meridian3.netlify.app/#product",
+      "name": "MERIDIAN The Calibre One",
+      "description": "Configure your case, dial, and strap in real time. Inspect it from every angle before it leaves the workshop.",
+      "brand": { "@type": "Brand", "name": "MERIDIAN" },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": "2400",
+        "offerCount": "3",
+        "availability": "https://schema.org/InStock",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://meridian3.netlify.app/#website",
+      "url": "https://meridian3.netlify.app",
+      "name": "MERIDIAN",
+      "publisher": { "@id": "https://meridian3.netlify.app/#org" },
+    },
+  ],
+};
+
 const FEATURES = [
   {
     t: "Built to your spec",
@@ -30,6 +65,10 @@ const FEATURES = [
 export default function Home() {
   return (
     <main className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }}
+      />
       <Hero />
 
       {/* ── MARQUEE 1 ── */}

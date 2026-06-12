@@ -1,7 +1,11 @@
 import Reveal from "@/components/Reveal";
 import { PRODUCT } from "@/lib/product.config";
 
-export const metadata = { title: `Materials — ${PRODUCT.brand}` };
+export const metadata = {
+  title: `Materials — ${PRODUCT.brand}`,
+  description: "Explore the materials behind every MERIDIAN watch: Grade 5 titanium, 316L steel, sapphire crystal, and hand-stitched straps.",
+  alternates: { canonical: "/materials" },
+};
 
 const MATERIALS = [
   {
