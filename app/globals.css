@@ -37,6 +37,14 @@ body {
   border-radius: 4px;
 }
 
+/* ── Spline transparent background — lets video show through ── */
+.spline-wrapper canvas {
+  background: transparent !important;
+}
+.spline-wrapper > div {
+  background: transparent !important;
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

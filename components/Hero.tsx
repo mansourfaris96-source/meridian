@@ -3,14 +3,20 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplineScene from "./SplineScene";
 import SplitHeadline from "./SplitHeadline";
 import HeroParticles from "./HeroParticles";
 import { PRODUCT } from "@/lib/product.config";
+import { SPLINE_SCENE_URL, DEMO_SCENE_URL } from "@/lib/spline-config";
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const videoRef   = useRef<HTMLVideoElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef  = useRef<HTMLElement>(null);
+  const videoRef    = useRef<HTMLVideoElement>(null);
+  const sceneRef    = useRef<HTMLDivElement>(null);
+  const contentRef  = useRef<HTMLDivElement>(null);
+
+  const heroScene = SPLINE_SCENE_URL.trim() || DEMO_SCENE_URL;
+  const usingDemo = !SPLINE_SCENE_URL.trim();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -21,14 +27,16 @@ export default function Hero() {
         scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
       });
       tl.to(contentRef.current, { y: -90, opacity: 0, ease: "none" }, 0);
-      tl.to(videoRef.current,   { scale: 1.18, opacity: 0.2, ease: "none" }, 0);
+      tl.to(videoRef.current,   { scale: 1.12, opacity: 0.1, ease: "none" }, 0);
+      tl.to(sceneRef.current,   { scale: 1.12, opacity: 0,   ease: "none" }, 0);
     }, sectionRef);
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={sectionRef} className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
-      {/* Cinematic video background — Higgsfield workshop shot */}
+
+      {/* Layer 0 — Higgsfield cinematic video */}
       <video
         ref={videoRef}
         className="absolute inset-0 z-0 h-full w-full object-cover"
@@ -40,9 +48,20 @@ export default function Hero() {
         preload="auto"
       />
 
-      {/* Gradient overlays */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/60 to-[#08080a]/20" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(60%_50%_at_50%_35%,rgba(201,168,83,0.12),transparent_70%)]" />
+      {/* Layer 1 — subtle dark vignette so text stays readable */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/30 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(60%_50%_at_50%_35%,rgba(201,168,83,0.10),transparent_70%)]" />
+
+      {/* Layer 2 — Spline 3D robot (transparent canvas sits above video) */}
+      <div ref={sceneRef} className="absolute inset-0 z-[2]">
+        <SplineScene scene={heroScene} />
+      </div>
+
+      {usingDemo && (
+        <span className="absolute right-5 top-20 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-white/50 backdrop-blur">
+          demo scene · replace in lib/spline-config.ts
+        </span>
+      )}
 
       <HeroParticles />
 
