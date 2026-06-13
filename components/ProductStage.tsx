@@ -33,7 +33,7 @@ export default function ProductStage({ colorHex, materialId }: Props) {
   }, [colorHex, caseColor, materialId]);
 
   return (
-    <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-[#0c0c10]">
+    <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-[#0c0c10]/50">
       <WatchScene />
     </div>
   );

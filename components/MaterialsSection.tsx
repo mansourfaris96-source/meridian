@@ -50,7 +50,7 @@ export default function MaterialsSection() {
           <ScrollReveal3D key={m.id} delay={i * 0.1} rotateFrom={10}>
             <TiltCard intensity={10}>
               <div
-                className="group relative overflow-hidden rounded-2xl border border-white/8 bg-[#0c0c10] p-8 transition-all duration-500 hover:border-white/20"
+                className="group relative overflow-hidden rounded-2xl border border-white/8 bg-[#0c0c10]/60 backdrop-blur-sm p-8 transition-all duration-500 hover:border-white/20"
               >
                 <div
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"

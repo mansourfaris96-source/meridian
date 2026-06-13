@@ -83,7 +83,7 @@ export default function Home() {
       <section className="mx-auto grid max-w-5xl gap-8 px-6 py-10 sm:grid-cols-3 sm:px-10">
         {FEATURES.map((c, i) => (
           <ScrollReveal3D key={c.t} delay={i * 0.12} rotateFrom={10}>
-            <TiltCard intensity={14} className="rounded-xl border border-white/8 bg-[#0c0c10] p-7 transition-colors hover:border-white/15">
+            <TiltCard intensity={14} className="rounded-xl border border-white/8 bg-[#0c0c10]/60 backdrop-blur-sm p-7 transition-colors hover:border-white/15">
               <h3 className="font-serif text-2xl italic">{c.t}</h3>
               <p className="mt-3 text-sm leading-7 text-white/55">{c.d}</p>
             </TiltCard>

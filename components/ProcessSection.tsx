@@ -69,7 +69,7 @@ export default function ProcessSection() {
         {/* ── STATS ROW ── */}
         <div className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/8 bg-white/8 sm:grid-cols-4">
           {STATS.map((s) => (
-            <div key={s.label} className="bg-[#0c0c10] px-8 py-10 text-center">
+            <div key={s.label} className="bg-[#0c0c10]/60 backdrop-blur-sm px-8 py-10 text-center">
               <p className="font-serif text-4xl italic text-amber-200/90">
                 <CountUp end={s.end} suffix={s.suffix ?? ""} />
               </p>
