@@ -62,8 +62,16 @@ export default function Hero() {
           <SplineScene scene={heroScene} />
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/55 to-[#08080a]/30" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(60%_50%_at_50%_35%,rgba(201,168,83,0.10),transparent_70%)]" />
+
+      {/* Mask the workshop background, reveal only the robot + amber spotlight */}
+      {/* Heavy vignette from all edges toward centre */}
+      <div className="pointer-events-none absolute inset-0 z-[1]" style={{background:"radial-gradient(ellipse 55% 70% at 50% 45%, transparent 30%, #08080a 72%)"}} />
+      {/* Kill the bench / floor */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/80 to-transparent" style={{top:"55%"}} />
+      {/* Kill top workshop ceiling */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#08080a]/90 to-transparent" style={{bottom:"70%"}} />
+      {/* Amber spotlight punch — warm glow where the robot stands */}
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_40%_55%_at_50%_38%,rgba(201,168,83,0.18),transparent_65%)]" />
       <HeroParticles />
       {usingDemo && (
         <span className="absolute right-5 top-20 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-white/50 backdrop-blur">
