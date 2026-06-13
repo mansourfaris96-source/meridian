@@ -63,8 +63,12 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Kill workshop bench — hard black fade from 55% height downward */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_bottom,transparent_45%,#08080a_68%)]" />
+      {/* Kill side walls of workshop */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(to_right,#08080a_0%,transparent_20%,transparent_80%,#08080a_100%)]" />
       {/* Amber spotlight — warm gold glow behind robot */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_50%_60%_at_50%_38%,rgba(201,168,83,0.20),transparent_65%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_50%_60%_at_50%_38%,rgba(201,168,83,0.20),transparent_65%)]" />
       <HeroParticles />
       {usingDemo && (
         <span className="absolute right-5 top-20 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-white/50 backdrop-blur">
