@@ -56,7 +56,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
+    <section ref={sectionRef} className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center bg-[#08080a]">
       <div ref={sceneOuterRef} className="absolute inset-0 z-0">
         <div ref={sceneInnerRef} className="h-full w-full will-change-transform">
           <SplineScene scene={heroScene} />
