@@ -58,6 +58,18 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-[#08080a] text-white">
         <AuthProvider>
+          {/* Fixed cinematic video — sits behind every section site-wide */}
+          <video
+            className="fixed inset-0 -z-10 h-full w-full object-cover opacity-30"
+            src="/hero-bg.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          />
+          {/* Subtle dark overlay so sections with their own bg still look right */}
+          <div className="fixed inset-0 -z-10 bg-[#08080a]/55" />
           <FilmGrain />
           <SpotlightCursor />
           <PageTransition />
