@@ -24,7 +24,7 @@
 
 html,
 body {
-  background: #08080a;
+  background: transparent;
   color: #ededed;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
