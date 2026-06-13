@@ -57,29 +57,30 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#08080a] text-white">
+        {/* Fixed cinematic video — z-[1] so it sits above body background */}
+        <video
+          className="fixed inset-0 z-[1] h-full w-full object-cover opacity-50 pointer-events-none"
+          src="/hero-bg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        />
         <AuthProvider>
-          {/* Fixed cinematic video — sits behind every section site-wide */}
-          <video
-            className="fixed inset-0 -z-10 h-full w-full object-cover opacity-50"
-            src="/hero-bg.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-          />
-          {/* Dark base so page is readable even when video fades */}
-          <div className="fixed inset-0 -z-[11] bg-[#08080a]" />
           <FilmGrain />
           <SpotlightCursor />
           <PageTransition />
           <MagneticCursor />
           <AuthModal />
+          {/* All content at z-[2] — sits above video */}
+          <div className="relative z-[2]">
           <SmoothScroll>
             <Header />
             {children}
             <CartDrawer />
           </SmoothScroll>
+          </div>
         </AuthProvider>
       </body>
     </html>
