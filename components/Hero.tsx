@@ -57,6 +57,16 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
+      {/* Cinematic video background — workshop atmosphere */}
+      <video
+        className="absolute inset-0 z-[-1] h-full w-full object-cover opacity-60"
+        src="/hero-bg.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+      />
       <div ref={sceneOuterRef} className="absolute inset-0 z-0">
         <div ref={sceneInnerRef} className="h-full w-full will-change-transform">
           <SplineScene scene={heroScene} />
