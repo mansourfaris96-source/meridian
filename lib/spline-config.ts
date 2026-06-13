@@ -6,7 +6,7 @@
 // │                                                                        │
 // │  Leave it empty and the page shows a styled placeholder instead.       │
 // └──────────────────────────────────────────────────────────────────────┘
-export const SPLINE_SCENE_URL = "";
+export const SPLINE_SCENE_URL = "https://prod.spline.design/fvVSDVfSTBbVjvJJ/scene.splinecode";
 
 // ── TEMPORARY DEMO SCENE ──────────────────────────────────────────────────
 // A public Spline scene so you can SEE the 3D effect immediately, before you
