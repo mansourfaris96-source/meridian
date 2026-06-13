@@ -1,14 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-// @splinetool/react-spline touches `window` on load, so it must NEVER render
-// on the server. Loading it through next/dynamic with ssr:false guarantees the
-// component is client-only and avoids "window is not defined" build errors.
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => <SceneSkeleton />,
-});
+import { useEffect, useRef } from "react";
 
 function SceneSkeleton() {
   return (
@@ -18,11 +10,44 @@ function SceneSkeleton() {
   );
 }
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "spline-viewer": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+        url?: string;
+        background?: string;
+        "loading-anim-type"?: string;
+      }, HTMLElement>;
+    }
+  }
+}
+
 export default function SplineScene({ scene }: { scene: string }) {
-  // Absolute-fill so the 3D scene sits behind the hero text.
+  const ref = useRef<HTMLDivElement>(null);
+  const loaded = useRef(false);
+
+  useEffect(() => {
+    if (loaded.current) return;
+    loaded.current = true;
+
+    // Dynamically inject the spline-viewer web component script
+    if (!document.querySelector('script[data-spline-viewer]')) {
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js";
+      script.setAttribute("data-spline-viewer", "true");
+      document.head.appendChild(script);
+    }
+  }, []);
+
   return (
-    <div className="absolute inset-0">
-      <Spline scene={scene} />
+    <div ref={ref} className="absolute inset-0">
+      <spline-viewer
+        url={scene}
+        background="transparent"
+        loading-anim-type="none"
+        style={{ width: "100%", height: "100%" }}
+      />
     </div>
   );
 }

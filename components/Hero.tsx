@@ -63,17 +63,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Mask all workshop background — keep only robot */}
-      {/* Sides: left & right dark walls */}
-      <div className="pointer-events-none absolute inset-0 z-[1]" style={{background:"linear-gradient(to right, #08080a 8%, transparent 35%, transparent 65%, #08080a 92%)"}} />
-      {/* Bottom: kill the bench, gears, floor completely */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1]" style={{height:"45%", background:"linear-gradient(to top, #08080a 55%, transparent 100%)"}} />
-      {/* Top: kill ceiling */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1]" style={{height:"18%", background:"linear-gradient(to bottom, #08080a 30%, transparent 100%)"}} />
-      {/* Overall ambient dark to kill mid-background */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#08080a]/45" />
-      {/* Amber spotlight — warm gold glow centred on robot */}
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_38%_50%_at_50%_36%,rgba(201,168,83,0.22),transparent_60%)]" />
+      {/* Amber spotlight — warm gold glow behind robot */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_50%_60%_at_50%_38%,rgba(201,168,83,0.20),transparent_65%)]" />
       <HeroParticles />
       {usingDemo && (
         <span className="absolute right-5 top-20 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-white/50 backdrop-blur">
