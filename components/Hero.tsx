@@ -10,13 +10,36 @@ import { PRODUCT } from "@/lib/product.config";
 import { SPLINE_SCENE_URL, DEMO_SCENE_URL } from "@/lib/spline-config";
 
 export default function Hero() {
-  const sectionRef  = useRef<HTMLElement>(null);
-  const videoRef    = useRef<HTMLVideoElement>(null);
-  const sceneRef    = useRef<HTMLDivElement>(null);
-  const contentRef  = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const sceneOuterRef = useRef<HTMLDivElement>(null);
+  const sceneInnerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const heroScene = SPLINE_SCENE_URL.trim() || DEMO_SCENE_URL;
   const usingDemo = !SPLINE_SCENE_URL.trim();
+
+  useEffect(() => {
+    const el = sceneInnerRef.current;
+    if (!el) return;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+    if (reduce || !fine) return;
+    let raf = 0;
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+    const onMove = (e: MouseEvent) => {
+      tx = (e.clientX / window.innerWidth - 0.5) * 26;
+      ty = (e.clientY / window.innerHeight - 0.5) * 26;
+    };
+    const loop = () => {
+      cx += (tx - cx) * 0.08;
+      cy += (ty - cy) * 0.08;
+      el.style.transform = `translate3d(${cx}px, ${cy}px, 0) scale(1.06)`;
+      raf = requestAnimationFrame(loop);
+    };
+    window.addEventListener("mousemove", onMove);
+    raf = requestAnimationFrame(loop);
+    return () => { window.removeEventListener("mousemove", onMove); cancelAnimationFrame(raf); };
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -27,44 +50,26 @@ export default function Hero() {
         scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
       });
       tl.to(contentRef.current, { y: -90, opacity: 0, ease: "none" }, 0);
-      tl.to(videoRef.current,   { scale: 1.12, opacity: 0.1, ease: "none" }, 0);
-      tl.to(sceneRef.current,   { scale: 1.12, opacity: 0,   ease: "none" }, 0);
+      tl.to(sceneOuterRef.current, { scale: 1.25, opacity: 0.15, ease: "none" }, 0);
     }, sectionRef);
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={sectionRef} className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
-
-      {/* Layer 0 — Higgsfield cinematic video */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        src="/hero-bg.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      />
-
-      {/* Layer 1 — subtle dark vignette so text stays readable */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/30 to-transparent" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(60%_50%_at_50%_35%,rgba(201,168,83,0.10),transparent_70%)]" />
-
-      {/* Layer 2 — Spline 3D robot (transparent canvas sits above video) */}
-      <div ref={sceneRef} className="absolute inset-0 z-[2]">
-        <SplineScene scene={heroScene} />
+      <div ref={sceneOuterRef} className="absolute inset-0 z-0">
+        <div ref={sceneInnerRef} className="h-full w-full will-change-transform">
+          <SplineScene scene={heroScene} />
+        </div>
       </div>
-
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/55 to-[#08080a]/30" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(60%_50%_at_50%_35%,rgba(201,168,83,0.10),transparent_70%)]" />
+      <HeroParticles />
       {usingDemo && (
         <span className="absolute right-5 top-20 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-white/50 backdrop-blur">
           demo scene · replace in lib/spline-config.ts
         </span>
       )}
-
-      <HeroParticles />
-
       <div ref={contentRef} className="pointer-events-none relative z-10 flex flex-col items-center">
         <p className="font-mono text-xs uppercase tracking-[0.4em] text-amber-200/80">{PRODUCT.brand} — Made to order</p>
         <SplitHeadline

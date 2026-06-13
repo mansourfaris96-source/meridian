@@ -21,8 +21,8 @@ function SceneSkeleton() {
 export default function SplineScene({ scene }: { scene: string }) {
   // Absolute-fill so the 3D scene sits behind the hero text.
   return (
-    <div className="spline-wrapper absolute inset-0" style={{ background: "transparent" }}>
-      <Spline scene={scene} style={{ background: "transparent" }} />
+    <div className="absolute inset-0">
+      <Spline scene={scene} />
     </div>
   );
 }
