@@ -26,10 +26,11 @@ export default function ProductStage({ colorHex, materialId }: Props) {
 
   // Update colorBus every time selection changes — no Canvas re-render needed
   useEffect(() => {
-    colorBus.dial  = colorHex;
-    colorBus.case  = caseColor;
-    colorBus.dirty = true;
-  }, [colorHex, caseColor]);
+    colorBus.dial     = colorHex;
+    colorBus.case     = caseColor;
+    colorBus.material = materialId;
+    colorBus.dirty    = true;
+  }, [colorHex, caseColor, materialId]);
 
   return (
     <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-[#0c0c10]">
