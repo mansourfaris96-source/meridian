@@ -63,15 +63,17 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Mask the workshop background, reveal only the robot + amber spotlight */}
-      {/* Heavy vignette from all edges toward centre */}
-      <div className="pointer-events-none absolute inset-0 z-[1]" style={{background:"radial-gradient(ellipse 55% 70% at 50% 45%, transparent 30%, #08080a 72%)"}} />
-      {/* Kill the bench / floor */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08080a] via-[#08080a]/80 to-transparent" style={{top:"55%"}} />
-      {/* Kill top workshop ceiling */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#08080a]/90 to-transparent" style={{bottom:"70%"}} />
-      {/* Amber spotlight punch — warm glow where the robot stands */}
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_40%_55%_at_50%_38%,rgba(201,168,83,0.18),transparent_65%)]" />
+      {/* Mask all workshop background — keep only robot */}
+      {/* Sides: left & right dark walls */}
+      <div className="pointer-events-none absolute inset-0 z-[1]" style={{background:"linear-gradient(to right, #08080a 8%, transparent 35%, transparent 65%, #08080a 92%)"}} />
+      {/* Bottom: kill the bench, gears, floor completely */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1]" style={{height:"45%", background:"linear-gradient(to top, #08080a 55%, transparent 100%)"}} />
+      {/* Top: kill ceiling */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1]" style={{height:"18%", background:"linear-gradient(to bottom, #08080a 30%, transparent 100%)"}} />
+      {/* Overall ambient dark to kill mid-background */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#08080a]/45" />
+      {/* Amber spotlight — warm gold glow centred on robot */}
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_38%_50%_at_50%_36%,rgba(201,168,83,0.22),transparent_60%)]" />
       <HeroParticles />
       {usingDemo && (
         <span className="absolute right-5 top-20 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-white/50 backdrop-blur">
